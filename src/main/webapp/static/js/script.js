@@ -18,8 +18,8 @@ $("#form-short").submit(function(event){
     		customAlias: document.querySelector('#key').value
     		};
     
-    //var uri = '/encurtar/criar';
-    var uri = '/hire.me/encurtar/criar';
+    var uri = '/encurtar/criar';
+    //var uri = '/hire.me/encurtar/criar';
     
     $.ajax( {
     	url: uri,
