@@ -85,5 +85,9 @@ public class EncurtadorLinkService {
 	public List<Link> listaDezMais() {
 		return linkDao.getlistarMaxDez();
 	}
+	
+	public void removeLink(String alias){
+		linkDao.removeLink(alias);
+	}
 
 }

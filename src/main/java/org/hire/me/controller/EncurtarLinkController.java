@@ -13,6 +13,7 @@ import org.hire.me.vo.LinkVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ public class EncurtarLinkController {
 	@RequestMapping(value="criar", method={RequestMethod.PUT,RequestMethod.POST})
 	@ResponseBody
 	public BaseVo criar(LinkInputVo linkInputVo){
+		System.out.println("criar " + linkInputVo);
 		try {
 			long inicioTimeInMillis = DataUtil.getAgoraInMillis();
 			
@@ -45,6 +47,29 @@ public class EncurtarLinkController {
 		}
 		
 	}
+	
+	@RequestMapping(value="criacao", method={RequestMethod.PUT,RequestMethod.POST})
+	@ResponseBody
+	public BaseVo criacao(@RequestBody LinkInputVo linkInputVo){
+		System.out.println("Criacao " + linkInputVo);
+		try {
+			long inicioTimeInMillis = DataUtil.getAgoraInMillis();
+			
+			Link link = service.criar(linkInputVo.getUrl(),linkInputVo.getCustomAlias());
+			
+			long fimTimeInMillis = DataUtil.getAgoraInMillis();
+			
+			return LinkVo.parse(link, ( fimTimeInMillis - inicioTimeInMillis));
+			
+		} catch (EncurtadorLinkException e) {
+			e.printStackTrace();
+			return ErrorVo.parse(linkInputVo.getCustomAlias(), e.getCode(), e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ErrorVo.parse(linkInputVo.getCustomAlias(), "999", e.getMessage());
+		}
+		
+	}	
 	
 	@RequestMapping(value = "recuperar/{alias}", method = { RequestMethod.GET })
 	@ResponseBody
@@ -75,5 +100,13 @@ public class EncurtarLinkController {
 
 		return links;
 	}
+	
+	@RequestMapping(value = "remove/{alias}", method = { RequestMethod.GET })
+	@ResponseBody
+	public void remove(@PathVariable String alias) {	
+		System.out.println("--- removendo " + alias);
+		service.removeLink(alias);
+		System.out.println("--- removendo sucesso ");
+	}	
 
 }

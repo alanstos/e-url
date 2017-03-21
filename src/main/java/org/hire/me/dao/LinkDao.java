@@ -50,5 +50,13 @@ public class LinkDao {
 				.setMaxResults(maxResult)
 				.getResultList();
 	}
+	
+	public void removeLink(String alias) {
+		entityManager.remove(findByAlias(alias));
+	}		
+	
+	public void removeLink(Link link) {
+		entityManager.remove(link);
+	}	
 
 }

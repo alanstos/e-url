@@ -18,5 +18,17 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}	
+	
+//	@Override
+//	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//		converters.add(jacksonMessageConverter());
+//	}
+//	
+//	@Bean("jacksonMessageConverter")
+//    public MappingJackson2HttpMessageConverter jacksonMessageConverter() {
+//		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//		converter.setPrettyPrint(true);
+//        return converter;
+//    }	
 
 }
