@@ -5,8 +5,8 @@
 }
 
 .img-footer {
-    width:25px; 
-    height:25px;
+    width:31px; 
+    height:31px;
 }
 
 .copiar {
@@ -32,5 +32,15 @@
 
 .pure-menu-selected .pure-menu-link:visited {
     color : white;
+}
+
+.footer a {
+    text-decoration: none;  
+    color: #fff;
+}
+
+.img-android {
+    width: 30px;
+    height: 30px;
 }
 
