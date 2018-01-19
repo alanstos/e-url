@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value="API REST Encurtador de URL")
 @Controller
 @RequestMapping("encurtar")
 public class EncurtarLinkController {
@@ -25,6 +29,7 @@ public class EncurtarLinkController {
 	@Autowired
 	EncurtadorLinkService service;
 	
+	@ApiOperation(value="Salva um novo link")
 	@RequestMapping(value="criar", method={RequestMethod.PUT,RequestMethod.POST})
 	@ResponseBody
 	public BaseVo criar(LinkInputVo linkInputVo){
@@ -48,6 +53,7 @@ public class EncurtarLinkController {
 		
 	}
 	
+	@ApiOperation(value="Salva um novo link")
 	@RequestMapping(value="criacao", method={RequestMethod.PUT,RequestMethod.POST})
 	@ResponseBody
 	public BaseVo criacao(@RequestBody LinkInputVo linkInputVo){
@@ -71,6 +77,7 @@ public class EncurtarLinkController {
 		
 	}	
 	
+	@ApiOperation(value="Recuperar um link")
 	@RequestMapping(value = "recuperar/{alias}", method = { RequestMethod.GET })
 	@ResponseBody
 	public BaseVo recuperar(@PathVariable String alias) {
@@ -92,6 +99,7 @@ public class EncurtarLinkController {
 		}
 	}
 	
+	@ApiOperation(value="Listar os dez mais acessados")
 	@RequestMapping(value = "listar", method = { RequestMethod.GET })
 	@ResponseBody
 	public List<Link> listar() {
@@ -101,6 +109,7 @@ public class EncurtarLinkController {
 		return links;
 	}
 	
+	@ApiOperation(value="Excluir um link")
 	@RequestMapping(value = "remove/{alias}", method = { RequestMethod.GET })
 	@ResponseBody
 	public void remove(@PathVariable String alias) {	

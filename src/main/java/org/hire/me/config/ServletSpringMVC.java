@@ -1,10 +1,7 @@
 package org.hire.me.config;
 
 import javax.servlet.Filter;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -12,7 +9,7 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		 return new Class[]{AppWebConfiguration.class,JPAConfiguration.class,JPAProductionConfiguration.class};
+		 return new Class[]{AppWebConfiguration.class,JPAConfiguration.class,JPAProductionConfiguration.class,SwaggerConfig.class};
 	}
 
 	@Override
