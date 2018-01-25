@@ -41,7 +41,8 @@
     <div class="content">
         <h2 class="content-head is-center">LOGIN</h2>
         
-        <div><a href="javascript:void(0)" onclick="login();">Login pelo Facebook</a></div>
+        <div><a href="javascript:void(0)" onclick="login();" id="logar">Login pelo Facebook</a></div>
+        <div><a href="javascript:void(0)" onclick="logout();" id="logout">Logout Facebook</a></div>
         <div id="status"></div>
         
         <fb:login-button 
@@ -49,29 +50,7 @@
 		  onlogin="checkLoginState();">
 		</fb:login-button>
         
-        <table id="tb-servicos" class="pure-table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Nome</th>
-                    <th>URI</th>
-                </tr>
-            </thead>
-
-            <tbody>
-               <tr>
-                    <td>1</td>
-                    <td>Criar</td>
-                    <td>/encurtar/criar</td>
-                </tr>
-
-                <tr class="pure-table-odd">
-					<td>2</td>
-                    <td>Recuperar</td>
-                    <td>/encurtar/recuperar/{alias}</td>
-                </tr>
-            </tbody>
-        </table>            
+      
         
     </div>    
 
@@ -95,6 +74,10 @@
 	    });
 	      
 	    FB.AppEvents.logPageView();   
+	    
+	  	FB.getLoginStatus(function(response) {
+	  		statusChangeCallback(response);
+	  	});
 	      
 	  };
 	
@@ -118,21 +101,67 @@
     	  });
 	    }
 	    
+	    function logoutFace(){
+    	  FB.logout(function(response) {
+    		  statusChangeCallback(response);
+    		  $('#status').html('<p>Logout realizado com sucesso.</p>')
+      	  });
+	    }
+	    
 	    function statusChangeCallback(response){
+	    	
+	    	$('#logar').show();
+	    	$('#logout').hide();
 	    	
 	    	if (response.status === 'connected'){
 	    		console.log('connected')
+	    		console.log(response)
+	    		
+	    		testAPI()
+	    		
+	    		$('#logar').hide()
+	    		$('#logout').show();
+	    		$('#status').html('<p>Parabens voce esta logado</p>')
 	    	}else if (response.status === 'not_authorized'){
 	    		console.log('not_authorized')
+	    		$('#status').html('<p>Favor autorizar o aplicativo</p>')
 	    	}else {
 	    		console.log('unknown')
+	    		$('#status').html('<p>Favor realizar o login</p>')
 	    	}
 	    	
 	    }
 	    
 	    function login(){
 	    	console.log('foi para login')
-	    	checkLoginState();
+	    	
+	    	
+	    	FB.login(function(response) {
+	    	    if (response.authResponse) {
+	    	     console.log('Welcome!  Fetching your information.... ');
+	    	     FB.api('/me', function(response) {
+	    	       console.log('Good to see you, ' + response.name + '.');
+	    	     });
+	    	    } else {
+	    	     console.log('User cancelled login or did not fully authorize.');
+	    	    }
+	    	});
+	    }
+	    
+	    function logout(){
+	    	console.log('foi para logout')
+	    	logoutFace();
+	    }
+	    
+	    function testAPI(){
+	    	console.log('primeira chamada')
+	    	FB.api('/me', {fields: 'last_name'}, function(response) {
+	    		 console.log(response);
+	    	});
+	    	console.log('segunda chamada')
+	    	FB.api('/me', function(response) {
+	    		 console.log(response);
+	    	});
 	    }
     
     
