@@ -45,7 +45,8 @@
         <div><a href="javascript:void(0)" onclick="logout();" id="logout">Logout Facebook</a></div>
         
         <div><a href="javascript:void(0)" onclick="infoGrupo();" id="infogrupo">Info Grupo</a></div>
-        <div><a href="javascript:void(0)" onclick="postGrupo();" id="postgrupo">Info Grupo</a></div>
+        <div><a href="javascript:void(0)" onclick="postGrupo();" id="postgrupo">Post Grupo</a></div>
+        <div><a href="javascript:void(0)" onclick="readGrupo();" id="readgrupo">Read Grupo</a></div>
         
         <div id="status"></div>
         
@@ -172,7 +173,7 @@
 	    	//});
 	    	console.log('chamada /me  ....')
 	    	FB.api('/me', function(response) {
-	    		$('#status').append('Seja bem vindo, ' + response.name + '.');
+	    		$('#status').append('Seja bem vindo, ' + response.name + '. ' + response.email );
 	    		console.log(response);
 	    	});
 	    }
@@ -190,6 +191,7 @@
 	    }
 	    
 	    function postGrupo(){
+	    	console.log('inicio post grupo')
 	    	FB.api(
 	    		    "/183841732205854/feed",
 	    		    "POST",
@@ -197,9 +199,22 @@
 	    		        "message": "This is a test message"
 	    		    },
 	    		    function (response) {
+	    		    	console.log(response)
 	    		      if (response && !response.error) {
 	    		        /* handle the result */
 	    		        console.log(response)
+	    		      }
+	    		    }
+	    		);
+	    }
+	    
+	    function readGrupo(){
+	    	FB.api(
+	    		    "/183841732205854/feed",
+	    		    function (response) {
+	    		    	console.log(response)
+	    		      if (response && !response.error) {
+	    		        /* handle the result */
 	    		      }
 	    		    }
 	    		);
