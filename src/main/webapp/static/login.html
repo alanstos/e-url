@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Simplifique sua URL aqui</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+
+    
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+
+    <link rel="stylesheet" href="css/layouts/marketing.css">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">   
+</head>
+<body>
+
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="index.html">E-url</a>
+
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item ">
+                <a href="index.html" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item pure-menu-selected" >
+                <a href="lista.html" class="pure-menu-link">Dez mais</a></li>
+            <li class="pure-menu-item">
+                <a href="servico.html" class="pure-menu-link">Serviços</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="">
+
+    <div class="content">
+        <h2 class="content-head is-center">LOGIN</h2>
+        
+        <div><a href="javascript:void(0)" onclick="login();">Login pelo Facebook</a></div>
+        <div id="status"></div>
+        
+        <fb:login-button 
+		  scope="public_profile,email"
+		  onlogin="checkLoginState();">
+		</fb:login-button>
+        
+        <table id="tb-servicos" class="pure-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>URI</th>
+                </tr>
+            </thead>
+
+            <tbody>
+               <tr>
+                    <td>1</td>
+                    <td>Criar</td>
+                    <td>/encurtar/criar</td>
+                </tr>
+
+                <tr class="pure-table-odd">
+					<td>2</td>
+                    <td>Recuperar</td>
+                    <td>/encurtar/recuperar/{alias}</td>
+                </tr>
+            </tbody>
+        </table>            
+        
+    </div>    
+
+    <div class="footer l-box is-center">
+        <a href="https://play.google.com/store/apps/details?id=com.rctntveurl" target="_black"> 
+            <img class="img-android" src="img/play.png" > </a> 
+        <a href="https://github.com/alanstos/hire.me" target="_black"> <img class="img-footer"  src="img/ghub.png" > </a> 
+    </div>
+
+</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+   	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '534742910243137',
+	      cookie     : true,
+	      xfbml      : true,
+	      version    : 'v2.5'
+	    });
+	      
+	    FB.AppEvents.logPageView();   
+	      
+	  };
+	
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "https://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
+    
+    <script>
+    
+
+
+	    
+	    function checkLoginState() {
+    	  FB.getLoginStatus(function(response) {
+    	    statusChangeCallback(response);
+    	  });
+	    }
+	    
+	    function statusChangeCallback(response){
+	    	
+	    	if (response.status === 'connected'){
+	    		console.log('connected')
+	    	}else if (response.status === 'not_authorized'){
+	    		console.log('not_authorized')
+	    	}else {
+	    		console.log('unknown')
+	    	}
+	    	
+	    }
+	    
+	    function login(){
+	    	console.log('foi para login')
+	    	checkLoginState();
+	    }
+    
+    
+    </script>
+    
+    
+
+  
+
+</body>
+</html>
