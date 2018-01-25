@@ -172,10 +172,12 @@
 	    		// console.log(response);
 	    	//});
 	    	console.log('chamada /me  ....')
-	    	FB.api('/me', function(response) {
-	    		$('#status').append('Seja bem vindo, ' + response.name + '. ' + response.email );
+	    	FB.api('/me?fields=id, email,first_name,gender, last_name, link, locale, name, timezone, verified', function(response) {
+	    		$('#status').append('Seja bem vindo, ' + response.name + '. E-mail: ' + response.email );
 	    		console.log(response);
 	    	});
+	    	
+	    	
 	    }
 	    
 	    function infoGrupo(){
