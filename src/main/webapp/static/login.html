@@ -70,7 +70,7 @@
 	      appId      : '534742910243137',
 	      cookie     : true,
 	      xfbml      : true,
-	      version    : 'v2.5'
+	      version    : 'v2.11'
 	    });
 	      
 	    FB.AppEvents.logPageView();   
@@ -116,12 +116,15 @@
 	    	if (response.status === 'connected'){
 	    		console.log('connected')
 	    		console.log(response)
-	    		
-	    		testAPI()
+	    		console.log('token=' + response.authResponse.accessToken)
 	    		
 	    		$('#logar').hide()
 	    		$('#logout').show();
+	    		
 	    		$('#status').html('<p>Parabens voce esta logado</p>')
+	    		
+	    		testAPI()
+	    		
 	    	}else if (response.status === 'not_authorized'){
 	    		console.log('not_authorized')
 	    		$('#status').html('<p>Favor autorizar o aplicativo</p>')
@@ -133,6 +136,12 @@
 	    }
 	    
 	    function login(){
+	    	FB.login(function(response) {
+	    		statusChangeCallback(response);
+	    	});
+	    }
+	    
+	    function login_2(){
 	    	console.log('foi para login')
 	    	
 	    	
@@ -149,27 +158,23 @@
 	    }
 	    
 	    function logout(){
-	    	console.log('foi para logout')
 	    	logoutFace();
 	    }
 	    
 	    function testAPI(){
-	    	console.log('primeira chamada')
-	    	FB.api('/me', {fields: 'last_name'}, function(response) {
-	    		 console.log(response);
-	    	});
-	    	console.log('segunda chamada')
+	    	//console.log('primeira chamada')
+	    	//FB.api('/me', {fields: 'last_name'}, function(response) {
+	    		// console.log(response);
+	    	//});
+	    	console.log('chamada /me  ....')
 	    	FB.api('/me', function(response) {
-	    		 console.log(response);
+	    		$('#status').append('Seja bem vindo, ' + response.name + '.');
+	    		console.log(response);
 	    	});
 	    }
     
     
     </script>
-    
-    
-
-  
 
 </body>
 </html>
