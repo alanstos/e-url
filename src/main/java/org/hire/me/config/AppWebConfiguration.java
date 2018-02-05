@@ -17,6 +17,8 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+	    registry.addResourceHandler("/google5822f1d7c23c1949.html").addResourceLocations("/static/google5822f1d7c23c1949.html");
+	    
 	    
 	    //swagger
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
